@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WorkList.TaskElemets;
 
 namespace WorkList
 {
@@ -14,12 +15,11 @@ namespace WorkList
     {
         static int counterRow = 2;
         static int counterPosition = 0;
-        public BindingList<Tasks> tasks= new BindingList<Tasks>();
         public TasksList()
         {
             InitializeComponent();
 
-            SetLayoutPanelSize(tableLayoutPanel1);
+            TasksSource.services.SetLayoutPanelSize(tableLayoutPanel1);
 
             tableLayoutPanel1.Controls.Add(label1, 0, 0);
             tableLayoutPanel1.Controls.Add(comboBox1, 1, 0);
@@ -38,8 +38,8 @@ namespace WorkList
             //tableLayoutPanel1.Controls.RemoveAt(3);
 
 
-            tasks.Add(new Tasks(label1.Text, comboBox1.SelectedItem, dateTimePicker1.Value, label6.Text, label2.Text, checkBox1.Checked));
-            tasks.Add(new Tasks(label10.Text, comboBox2.SelectedItem, dateTimePicker2.Value, label12.Text, label11.Text, checkBox2.Checked));
+            TasksSource.tasks.Add(new Tasks(label1.Text, comboBox1.SelectedItem, dateTimePicker1.Value, label6.Text, label2.Text, checkBox1.Checked));
+            TasksSource.tasks.Add(new Tasks(label10.Text, comboBox2.SelectedItem, dateTimePicker2.Value, label12.Text, label11.Text, checkBox2.Checked));
 
            
         }
@@ -79,77 +79,27 @@ namespace WorkList
 
 
 
-        private void button1_Click(object sender, EventArgs e)
+        private  void button1_Click(object sender, EventArgs e)
         {
-            Elements elements = new Elements();
-            elements.label.Text += NewTask.Text;
-            elements.label1.Text+= textBox1.Text;
-            elements.label2.Text+= textBox2.Text;
-
-
-
-            tableLayoutPanel1.Controls.Add(elements.label, 0, counterRow);
-            tableLayoutPanel1.Controls.Add(elements.comboBox, 1, counterRow);
-            tableLayoutPanel1.Controls.Add(elements.dateTimePicker, 2, counterRow);
-            tableLayoutPanel1.Controls.Add(elements.label1, 3, counterRow);
-            tableLayoutPanel1.Controls.Add(elements.label2, 4, counterRow);
-            tableLayoutPanel1.Controls.Add(elements.checkBox, 5, counterRow);
-
-
-            tasks.Add(new Tasks(elements.label.Text, elements.comboBox.SelectedItem, elements.dateTimePicker.Value, label1.Text, label2.Text, elements.checkBox.Checked));
-
-            counterRow++;
-
-            BackColor= Color.White;
-        }
-
-        void OtherInicialization(TableLayoutPanel tableLayoutPanel,BindingList<Tasks> _tasks)
-        {
-            SetLayoutPanelSize(tableLayoutPanel);
-
-            for (int i = 0; i < _tasks.Count; i++)
-            {
+       
                 Elements elements = new Elements();
+            elements.label.Text += NewTask.Text;
+            elements.label1.Text += textBox1.Text;
+            elements.label2.Text += textBox2.Text;
 
-                elements.label.Text = _tasks[i].task;
-                elements.comboBox.SelectedItem = _tasks[i].priority;
-                elements.dateTimePicker.Value = _tasks[i].date;
-                elements.label1.Text = _tasks[i].time;
-                elements.label2.Text = _tasks[i].comment;
-                elements.checkBox.Checked = _tasks[i].done;
 
-                tableLayoutPanel.Controls.Add(elements.label, 0, i);
-                tableLayoutPanel.Controls.Add(elements.comboBox, 1, i);
-                tableLayoutPanel.Controls.Add(elements.dateTimePicker, 2, i);
-                tableLayoutPanel.Controls.Add(elements.label1, 3, i);
-                tableLayoutPanel.Controls.Add(elements.label2, 4, i);
-                tableLayoutPanel.Controls.Add(elements.checkBox, 5, i);
+           
+                    tableLayoutPanel1.Controls.Add(elements.label, 0, counterRow);
+                    tableLayoutPanel1.Controls.Add(elements.comboBox, 1, counterRow);
+                    tableLayoutPanel1.Controls.Add(elements.dateTimePicker, 2, counterRow);
+                    tableLayoutPanel1.Controls.Add(elements.label1, 3, counterRow);
+                    tableLayoutPanel1.Controls.Add(elements.label2, 4, counterRow);
+                    tableLayoutPanel1.Controls.Add(elements.checkBox, 5, counterRow);
+          
 
-            }
-
+            
+                TasksSource.tasks.Add(new Tasks(elements.label.Text, elements.comboBox.SelectedItem, elements.dateTimePicker.Value, label1.Text, label2.Text, elements.checkBox.Checked));      
+            counterRow++;
         }
-
-       public void JoinPanels(TableLayoutPanel panel)
-        {
-            OtherInicialization(panel, tasks);
-        }
-
-      public  void SetLayoutPanelSize(TableLayoutPanel tableLayoutPanel)
-        {
-            tableLayoutPanel.ColumnStyles[4].SizeType = SizeType.Absolute;
-            tableLayoutPanel.ColumnStyles[4].Width = 120;
-            tableLayoutPanel.ColumnStyles[5].SizeType = SizeType.Absolute;
-            tableLayoutPanel.ColumnStyles[5].Width = 120;
-            tableLayoutPanel.ColumnStyles[3].SizeType = SizeType.Absolute;
-            tableLayoutPanel.ColumnStyles[3].Width = 200;
-            tableLayoutPanel.ColumnStyles[2].SizeType = SizeType.Absolute;
-            tableLayoutPanel.ColumnStyles[2].Width = 200;
-            tableLayoutPanel.ColumnStyles[0].SizeType = SizeType.Absolute;
-            tableLayoutPanel.ColumnStyles[0].Width = 250;
-            //tableLayoutPanel.ColumnStyles[6].SizeType = SizeType.Absolute;
-            //tableLayoutPanel.ColumnStyles[6].Width = 100;
-
-        }
-
     }
 }
