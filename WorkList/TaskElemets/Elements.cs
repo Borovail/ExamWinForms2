@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WorkList
+namespace WorkList.TaskElemets
 {
     internal class Elements
     {
@@ -22,7 +22,7 @@ namespace WorkList
             label.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label.AutoSize = true;
             label.Name = "label";
-            label.Size = new System.Drawing.Size(0, 40);      
+            label.Size = new Size(0, 40);
             label.Text = "Task " + "\n";
 
 
@@ -33,15 +33,15 @@ namespace WorkList
             comboBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             comboBox.FormattingEnabled = true;
             comboBox.Name = "comboBox";
-            comboBox.Size = new System.Drawing.Size(100, 33);
+            comboBox.Size = new Size(100, 33);
 
 
 
             dateTimePicker.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dateTimePicker.MinDate = new System.DateTime(2023, 4, 9, 0, 0, 0, 0);
+            dateTimePicker.MinDate = new DateTime(2023, 4, 9, 0, 0, 0, 0);
             dateTimePicker.Name = "dateTimePicker";
-            dateTimePicker.Size = new System.Drawing.Size(200, 31);        
-            dateTimePicker.Value = new System.DateTime(2023, 4, 9, 13, 13, 39, 0);
+            dateTimePicker.Size = new Size(200, 31);
+            dateTimePicker.Value = new DateTime(2023, 4, 9, 13, 13, 39, 0);
 
 
 
@@ -49,7 +49,7 @@ namespace WorkList
             label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label1.AutoSize = true;
             label1.Name = "labell";
-            label1.Size = new System.Drawing.Size(0, 40);          
+            label1.Size = new Size(0, 40);
             label1.Text = "Planned time for \nsolve the task(min): \n";
 
 
@@ -57,9 +57,9 @@ namespace WorkList
             checkBox.Dock = DockStyle.Fill;
             checkBox.TextAlign = ContentAlignment.MiddleCenter;
             checkBox.AutoSize = true;
-            checkBox.Location = new System.Drawing.Point(741, 142);
+            checkBox.Location = new Point(741, 142);
             checkBox.Name = "checkBox";
-            checkBox.Size = new System.Drawing.Size(89, 29);
+            checkBox.Size = new Size(89, 29);
             checkBox.Text = "Done?";
             checkBox.UseVisualStyleBackColor = true;
 
@@ -68,7 +68,7 @@ namespace WorkList
             label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label2.AutoSize = true;
             label2.Name = "labelll";
-            label2.Size = new System.Drawing.Size(0, 40);
+            label2.Size = new Size(0, 40);
             label2.Text = "Comments:\n";
         }
 
