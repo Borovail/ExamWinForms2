@@ -8,10 +8,10 @@ namespace WorkList
     {
         static int counter1 = 0;
         static int counter2 = 0;
-        Search _search = new Search();
-        TasksList _tasksList = new TasksList();
-        CreateTaskForDay _taskForDay = new CreateTaskForDay();
-        OpenTaskForDay _openTask = new OpenTaskForDay();
+        Search _search;
+        TasksList _tasksList;
+        CreateTaskForDay _taskForDay ;
+        OpenTaskForDay _openTask ;
 
         public Form1()
         {
@@ -81,9 +81,9 @@ namespace WorkList
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+                SetPanels(taskListPanel);
             if (counter1 != 1)
             {
-                SetPanels(taskListPanel);
                 _tasksList = new TasksList();
                 _tasksList.Show();
                 _tasksList.FormClosed += _tasksList_FormClosed1;
@@ -143,9 +143,9 @@ namespace WorkList
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+                SetPanels(searchPanel);
             if (counter2 != 1)
             {
-                SetPanels(searchPanel);
                 _search = new Search();
                 _search.FormClosed += Search_FormClosed;
                 _search.Show();
@@ -249,6 +249,7 @@ namespace WorkList
                 if (_search != null)
                 {
                     _tasksList.BringToFront();
+                    TasksSource.services.SaveData(_tasksList);
                 }
             }
         }

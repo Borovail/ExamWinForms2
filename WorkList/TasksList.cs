@@ -30,27 +30,35 @@ namespace WorkList
             //Новое положение формы
            Location = pt;
 
+            TasksSource.tasks = TasksSource.services.LoadData();
 
-            tableLayoutPanel1.Controls.Add(label1, 0, 0);
-            tableLayoutPanel1.Controls.Add(comboBox1, 1, 0);
-            tableLayoutPanel1.Controls.Add(dateTimePicker1, 2, 0);
-            tableLayoutPanel1.Controls.Add(label6, 3, 0);
-            tableLayoutPanel1.Controls.Add(label2, 4, 0);
-            tableLayoutPanel1.Controls.Add(checkBox1, 5, 0);
+            if (TasksSource.tasks.Count <=2)
+            {
 
-
-            tableLayoutPanel1.Controls.Add(label10, 0, 1);
-            tableLayoutPanel1.Controls.Add(comboBox2, 1, 1);
-            tableLayoutPanel1.Controls.Add(dateTimePicker2, 2, 1);
-            tableLayoutPanel1.Controls.Add(label12, 3, 1);
-            tableLayoutPanel1.Controls.Add(label11, 4, 1);
-            tableLayoutPanel1.Controls.Add(checkBox2, 5, 1);
-            //tableLayoutPanel1.Controls.RemoveAt(3);
+                tableLayoutPanel1.Controls.Add(label1, 0, 0);
+                tableLayoutPanel1.Controls.Add(comboBox1, 1, 0);
+                tableLayoutPanel1.Controls.Add(dateTimePicker1, 2, 0);
+                tableLayoutPanel1.Controls.Add(label6, 3, 0);
+                tableLayoutPanel1.Controls.Add(label2, 4, 0);
+                tableLayoutPanel1.Controls.Add(checkBox1, 5, 0);
 
 
-            TasksSource.tasks.Add(new Tasks(label1.Text, comboBox1.SelectedItem, dateTimePicker1.Value, label6.Text, label2.Text, checkBox1.Checked));
-            TasksSource.tasks.Add(new Tasks(label10.Text, comboBox2.SelectedItem, dateTimePicker2.Value, label12.Text, label11.Text, checkBox2.Checked));
+                tableLayoutPanel1.Controls.Add(label10, 0, 1);
+                tableLayoutPanel1.Controls.Add(comboBox2, 1, 1);
+                tableLayoutPanel1.Controls.Add(dateTimePicker2, 2, 1);
+                tableLayoutPanel1.Controls.Add(label12, 3, 1);
+                tableLayoutPanel1.Controls.Add(label11, 4, 1);
+                tableLayoutPanel1.Controls.Add(checkBox2, 5, 1);
+                //tableLayoutPanel1.Controls.RemoveAt(3);
 
+
+                TasksSource.tasks.Add(new Tasks(label1.Text, comboBox1.SelectedItem, dateTimePicker1.Value, label6.Text, label2.Text, checkBox1.Checked));
+                TasksSource.tasks.Add(new Tasks(label10.Text, comboBox2.SelectedItem, dateTimePicker2.Value, label12.Text, label11.Text, checkBox2.Checked));
+            }
+            else
+            {
+                TasksSource.services.InitPanel(tableLayoutPanel1, TasksSource.tasks);
+            }
            
         }
         private void label1_DragEnter(object sender, DragEventArgs e)

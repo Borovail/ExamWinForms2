@@ -9,8 +9,8 @@ namespace WorkList.TaskElemets
 {
     internal static class TasksSource
     {
+         static string Path = $"{Environment.CurrentDirectory}\\Tasks.json";
         public static IOServices services = new IOServices(Path);
-         static string Path = $"{Environment.CurrentDirectory}\\";
         public static BindingList<Tasks> tasks = new BindingList<Tasks>();
     }
 }
