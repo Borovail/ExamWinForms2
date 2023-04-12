@@ -43,19 +43,19 @@ namespace WorkList.TaskElemets
         }
 
 
-        public async void InitPanel(TableLayoutPanel tableLayoutPanel)
+        public async void InitPanel(TableLayoutPanel tableLayoutPanel,BindingList<Tasks> tasks)
         {
             
                 for (int i = 0; i < TasksSource.tasks.Count; i++)
                 {
                     Elements elements = new Elements();
 
-                    elements.label.Text = TasksSource.tasks[i].task;
-                    elements.comboBox.SelectedItem = TasksSource.tasks[i].priority;
-                    elements.dateTimePicker.Value = TasksSource.tasks[i].date;
-                    elements.label1.Text = TasksSource.tasks[i].time;
-                    elements.label2.Text = TasksSource.tasks[i].comment;
-                    elements.checkBox.Checked = TasksSource.tasks[i].done;
+                    elements.label.Text = tasks[i].task;
+                    elements.comboBox.SelectedItem = tasks[i].priority;
+                    elements.dateTimePicker.Value = tasks[i].date;
+                    elements.label1.Text = tasks[i].time;
+                    elements.label2.Text = tasks[i].comment;
+                    elements.checkBox.Checked = tasks[i].done;
 
                     tableLayoutPanel.Controls.Add(elements.label, 0, i);
                     tableLayoutPanel.Controls.Add(elements.comboBox, 1, i);

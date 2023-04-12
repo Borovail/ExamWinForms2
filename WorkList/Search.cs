@@ -17,14 +17,14 @@ namespace WorkList
         {
             InitializeComponent();
             TasksSource.services.SetLayoutPanelSize(tableLayoutPanel1);
-            TasksSource.services.InitPanel(tableLayoutPanel1);
+            TasksSource.services.InitPanel(tableLayoutPanel1, TasksSource.tasks);
         }
 
         public  void InitSearchPanel()
         {
             tableLayoutPanel1.Controls.Clear();
            
-            TasksSource.services.InitPanel(tableLayoutPanel1);
+            TasksSource.services.InitPanel(tableLayoutPanel1,TasksSource.tasks);
         }
 
 

@@ -21,6 +21,16 @@ namespace WorkList
 
             TasksSource.services.SetLayoutPanelSize(tableLayoutPanel1);
 
+            StartPosition = FormStartPosition.Manual;
+            Point pt = Screen.PrimaryScreen.WorkingArea.Location;
+            //Перенос в нижний правый угол экрана без панели задач
+            pt.Offset(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
+            //Перенос в местоположение верхнего левого угла формы, чтобы её правый нижний угол попал в правый нижний угол экрана
+            pt.Offset(-Width, -Height);
+            //Новое положение формы
+           Location = pt;
+
+
             tableLayoutPanel1.Controls.Add(label1, 0, 0);
             tableLayoutPanel1.Controls.Add(comboBox1, 1, 0);
             tableLayoutPanel1.Controls.Add(dateTimePicker1, 2, 0);
@@ -83,11 +93,9 @@ namespace WorkList
         {
        
                 Elements elements = new Elements();
-            elements.label.Text += NewTask.Text;
-            elements.label1.Text += textBox1.Text;
-            elements.label2.Text += textBox2.Text;
-
-
+            //elements.label.Text += NewTask.Text;
+            //elements.label1.Text += textBox1.Text;
+            //elements.label2.Text += textBox2.Text;
            
                     tableLayoutPanel1.Controls.Add(elements.label, 0, counterRow);
                     tableLayoutPanel1.Controls.Add(elements.comboBox, 1, counterRow);
@@ -95,11 +103,22 @@ namespace WorkList
                     tableLayoutPanel1.Controls.Add(elements.label1, 3, counterRow);
                     tableLayoutPanel1.Controls.Add(elements.label2, 4, counterRow);
                     tableLayoutPanel1.Controls.Add(elements.checkBox, 5, counterRow);
-          
 
-            
                 TasksSource.tasks.Add(new Tasks(elements.label.Text, elements.comboBox.SelectedItem, elements.dateTimePicker.Value, label1.Text, label2.Text, elements.checkBox.Checked));      
             counterRow++;
+        }
+
+        public void OtherInicialization(List<Tasks> tasks)
+        {
+            tableLayoutPanel1.Controls.Clear();
+            BindingList<Tasks> Tasklist = new BindingList<Tasks>();
+
+            foreach(var task in tasks)
+            {
+                Tasklist.Add(task);
+            }
+    
+            TasksSource.services.InitPanel(tableLayoutPanel1, Tasklist);
         }
     }
 }

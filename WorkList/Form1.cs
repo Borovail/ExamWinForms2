@@ -1,3 +1,5 @@
+using System.ComponentModel;
+using System.Linq;
 using WorkList.TaskElemets;
 
 namespace WorkList
@@ -28,13 +30,7 @@ namespace WorkList
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (counter1 != 1)
-            {
-                _tasksList = new TasksList();
-                _tasksList.FormClosed += _tasksList_FormClosed;
-                _tasksList.Show();
-                counter1++;
-            }
+                SetPanels(taskListPanel);
         }
 
        
@@ -45,20 +41,78 @@ namespace WorkList
         }
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            if (counter2!= 1)
-            {
-                search=new Search();
-                search.FormClosed += Search_FormClosed;
-                search.Show();
-                counter2++;
-            }
+        {         
+                SetPanels(searchPanel);      
+                _tasksList=new TasksList();
+
            
+
+            _tasksList.Show();
         }
 
         private void Search_FormClosed(object? sender, FormClosedEventArgs e)
         {
             counter2--;
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            panel1.Size = new Size(button1.Width+5, button1.Height+5);
+        }
+
+        private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            SetPanels(createTaskListPanel);
+        }
+
+
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            panel1.Size = new Size(162, 450);
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            SetPanels(openTaskListPanel);
+        }
+
+
+
+        private void SetPanels(Panel panel)
+        {
+            taskListPanel.Visible = false;
+            searchPanel.Visible = false;
+            createTaskListPanel.Visible = false;
+            openTaskListPanel.Visible = false;
+            panel.Location = new Point(158, -1);
+            panel.Size = new Size(642, 450);
+            panel.Visible = true;
+        }
+
+        private void startSearchButton_Click(object sender, EventArgs e)
+        {
+            List<Tasks> searchedTasks;
+            if (textBox3.Text != "")
+            {
+                searchedTasks = TasksSource.tasks.Where(i => i.task == textBox3.Text && i.priority == comboBox1.SelectedItem && i.date == dateTimePicker1.Value && i.done == checkBox1.Checked).ToList();
+            }
+            else
+            {
+                searchedTasks = TasksSource.tasks.Where(i => i.priority == comboBox1.SelectedItem && i.date == dateTimePicker1.Value && i.done == checkBox1.Checked).ToList();
+            }
+
+
+            if (searchedTasks.Count != 0)
+            {
+            _tasksList.OtherInicialization(searchedTasks);
+            }
+
+        }
+
+
+
+     
     }
 }
