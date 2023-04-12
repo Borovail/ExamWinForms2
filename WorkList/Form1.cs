@@ -21,6 +21,7 @@ namespace WorkList
                 if (search != null)
                 {
                     search.InitSearchPanel();
+                    _tasksList.BringToFront();
                 }
             }
         }

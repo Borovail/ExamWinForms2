@@ -35,6 +35,7 @@
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,11 +104,19 @@
             this.linkLabel1.Text = "Task List";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
+            // panel2
+            // 
+            this.panel2.Location = new System.Drawing.Point(157, -1);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(643, 450);
+            this.panel2.TabIndex = 2;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -125,5 +134,6 @@
         private LinkLabel linkLabel4;
         private LinkLabel linkLabel3;
         private Label label1;
+        private Panel panel2;
     }
 }
