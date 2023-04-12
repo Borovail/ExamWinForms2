@@ -89,22 +89,14 @@ namespace WorkList
 
 
 
-        private  void button1_Click(object sender, EventArgs e)
+        internal  void AddNewTasks(Elements elements)
         {
-       
-                Elements elements = new Elements();
-            //elements.label.Text += NewTask.Text;
-            //elements.label1.Text += textBox1.Text;
-            //elements.label2.Text += textBox2.Text;
-           
                     tableLayoutPanel1.Controls.Add(elements.label, 0, counterRow);
                     tableLayoutPanel1.Controls.Add(elements.comboBox, 1, counterRow);
                     tableLayoutPanel1.Controls.Add(elements.dateTimePicker, 2, counterRow);
                     tableLayoutPanel1.Controls.Add(elements.label1, 3, counterRow);
                     tableLayoutPanel1.Controls.Add(elements.label2, 4, counterRow);
                     tableLayoutPanel1.Controls.Add(elements.checkBox, 5, counterRow);
-
-                TasksSource.tasks.Add(new Tasks(elements.label.Text, elements.comboBox.SelectedItem, elements.dateTimePicker.Value, label1.Text, label2.Text, elements.checkBox.Checked));      
             counterRow++;
         }
 

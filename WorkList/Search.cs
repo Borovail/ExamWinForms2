@@ -20,13 +20,20 @@ namespace WorkList
             TasksSource.services.InitPanel(tableLayoutPanel1, TasksSource.tasks);
         }
 
-        public  void InitSearchPanel()
+     
+        public void OtherInicialization(List<Tasks> tasks)
         {
-            tableLayoutPanel1.Controls.Clear();
-           
-            TasksSource.services.InitPanel(tableLayoutPanel1,TasksSource.tasks);
-        }
+            tableLayoutPanel1.Controls.Clear();   
+            BindingList<Tasks> Tasklist = new BindingList<Tasks>();
+        
 
+            foreach (var task in tasks)
+            {
+                Tasklist.Add(task);
+            }
+
+            TasksSource.services.InitPanel(tableLayoutPanel1, Tasklist);
+        }
 
     }
 }

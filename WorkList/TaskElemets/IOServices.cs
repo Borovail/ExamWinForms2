@@ -43,10 +43,10 @@ namespace WorkList.TaskElemets
         }
 
 
-        public async void InitPanel(TableLayoutPanel tableLayoutPanel,BindingList<Tasks> tasks)
+        public  void InitPanel(TableLayoutPanel tableLayoutPanel,BindingList<Tasks> tasks)
         {
             
-                for (int i = 0; i < TasksSource.tasks.Count; i++)
+                for (int i = 0; i < tasks.Count; i++)
                 {
                     Elements elements = new Elements();
 

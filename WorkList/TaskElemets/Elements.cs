@@ -18,6 +18,12 @@ namespace WorkList.TaskElemets
         public Elements()
         {
 
+            
+           
+            
+         
+           
+           
 
             label.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label.AutoSize = true;

@@ -105,7 +105,7 @@ namespace WorkList
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 31);
             this.dateTimePicker1.TabIndex = 12;
-            this.dateTimePicker1.Value = new System.DateTime(2023, 4, 9, 13, 13, 39, 0);
+            this.dateTimePicker1.Value = DateTime.Now;
             // 
             // label2
             // 
@@ -153,7 +153,7 @@ namespace WorkList
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(200, 31);
             this.dateTimePicker2.TabIndex = 12;
-            this.dateTimePicker2.Value = new System.DateTime(2023, 4, 9, 13, 13, 39, 0);
+            this.dateTimePicker2.Value = DateTime.Now;
             // 
             // comboBox2
             // 

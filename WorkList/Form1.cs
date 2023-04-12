@@ -8,46 +8,149 @@ namespace WorkList
     {
         static int counter1 = 0;
         static int counter2 = 0;
-        Search search;
-        TasksList _tasksList;
+        Search _search = new Search();
+        TasksList _tasksList = new TasksList();
+        CreateTaskForDay _taskForDay = new CreateTaskForDay();
+        OpenTaskForDay _openTask = new OpenTaskForDay();
+
         public Form1()
         {
             InitializeComponent();
             TasksSource.tasks.ListChanged += Tasks_ListChanged;
         }
 
-        private void Tasks_ListChanged(object? sender, System.ComponentModel.ListChangedEventArgs e)
+
+
+        ///////////////////Form1/////////////////////////////
+        private void button1_Click(object sender, EventArgs e)
         {
-            if (e.ListChangedType == System.ComponentModel.ListChangedType.ItemAdded || e.ListChangedType == System.ComponentModel.ListChangedType.ItemDeleted)
-            {
-                if (search != null)
-                {
-                    search.InitSearchPanel();
-                    _tasksList.BringToFront();
-                }
-            }
+            panel1.Size = new Size(162, 450);
         }
+
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            panel1.Size = new Size(button1.Width + 5, button1.Height + 5);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ///////////////////Form1/////////////////////////////
+
+
+
+
+
+
+
+        ////////////////////////TaskList///////////////////////////////
+        private void addNewTaskButton_Click(object sender, EventArgs e)
+        {
+
+            Elements elements = new Elements();
+            elements.label.Text += textBoxNewTask.Text;
+            elements.comboBox.SelectedItem = comboBoxPriority.SelectedItem;
+            elements.dateTimePicker.Value = dateTimePicker1.Value;
+            elements.label1.Text += textBoxTime.Text;
+            elements.label2.Text += textBoxComment.Text;
+            elements.checkBox.Checked = false;
+
+            _tasksList.AddNewTasks(elements);
+            TasksSource.tasks.Add(new Tasks(textBoxNewTask.Text, comboBoxPriority.SelectedItem, dateTimePicker1.Value, textBoxTime.Text, textBoxComment.Text, false));
+        }
+
+
+
+
+    
+
+
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            if (counter1 != 1)
+            {
                 SetPanels(taskListPanel);
+                _tasksList = new TasksList();
+                _tasksList.Show();
+                _tasksList.FormClosed += _tasksList_FormClosed1;
+                counter1++;
+            }
         }
 
-       
-
-        private void _tasksList_FormClosed(object? sender, FormClosedEventArgs e)
+        private void _tasksList_FormClosed1(object? sender, FormClosedEventArgs e)
         {
             counter1--;
         }
 
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ////////////////////////TaskList///////////////////////////////
+
+
+
+
+
+
+
+        ////////////////////////Search//////////////////////////////////
+        private void startSearchButton_Click(object sender, EventArgs e)
+        {
+            List<Tasks> searchedTasks;
+
+            searchedTasks = TasksSource.tasks.Where(i => i.task == textBox3.Text || i.priority == comboBox1.SelectedItem || i.date == dateTimePicker1.Value || i.done == checkBox1.Checked).ToList();
+
+            if (searchedTasks.Count != 0)
+            {
+                _search.OtherInicialization(searchedTasks);
+            }
+
+        }
+
+
+
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {         
-                SetPanels(searchPanel);      
-                _tasksList=new TasksList();
-
-           
-
-            _tasksList.Show();
+        {
+            if (counter2 != 1)
+            {
+                SetPanels(searchPanel);
+                _search = new Search();
+                _search.FormClosed += Search_FormClosed;
+                _search.Show();
+                counter2++;
+            }
         }
 
         private void Search_FormClosed(object? sender, FormClosedEventArgs e)
@@ -55,30 +158,100 @@ namespace WorkList
             counter2--;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-            panel1.Size = new Size(button1.Width+5, button1.Height+5);
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ////////////////////////Search//////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+        ////////////////////Create Task////////////////////////////////////
 
         private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             SetPanels(createTaskListPanel);
         }
 
-
-
-
-        private void button1_Click(object sender, EventArgs e)
+        private void createDayTaskListButton_Click(object sender, EventArgs e)
         {
-            panel1.Size = new Size(162, 450);
+
         }
 
+
+
+
+
+
+
+
+        ////////////////////Create Task////////////////////////////////////
+
+
+
+
+
+
+        //////////////////////////Open Task///////////////////////////////////
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             SetPanels(openTaskListPanel);
         }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+        //////////////////////////Open Task///////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private void Tasks_ListChanged(object? sender, System.ComponentModel.ListChangedEventArgs e)
+        {
+            if (e.ListChangedType == System.ComponentModel.ListChangedType.ItemAdded || e.ListChangedType == System.ComponentModel.ListChangedType.ItemDeleted)
+            {
+                if (_search != null)
+                {
+                    _tasksList.BringToFront();
+                }
+            }
+        }
 
         private void SetPanels(Panel panel)
         {
@@ -91,28 +264,6 @@ namespace WorkList
             panel.Visible = true;
         }
 
-        private void startSearchButton_Click(object sender, EventArgs e)
-        {
-            List<Tasks> searchedTasks;
-            if (textBox3.Text != "")
-            {
-                searchedTasks = TasksSource.tasks.Where(i => i.task == textBox3.Text && i.priority == comboBox1.SelectedItem && i.date == dateTimePicker1.Value && i.done == checkBox1.Checked).ToList();
-            }
-            else
-            {
-                searchedTasks = TasksSource.tasks.Where(i => i.priority == comboBox1.SelectedItem && i.date == dateTimePicker1.Value && i.done == checkBox1.Checked).ToList();
-            }
-
-
-            if (searchedTasks.Count != 0)
-            {
-            _tasksList.OtherInicialization(searchedTasks);
-            }
-
-        }
-
-
-
-     
+       
     }
 }
