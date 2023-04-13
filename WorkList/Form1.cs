@@ -2,24 +2,54 @@ using System.ComponentModel;
 using System.Linq;
 using WorkList.TaskElemets;
 using Aspose.Words;
+using System.Collections.Generic;
+
 namespace WorkList
 {
     public partial class Form1 : Form
     {
         static int counter1 = 0;
         static int counter2 = 0;
+        static int counter3 = 0;
+        static int counter4 = 0;
+
         Search _search;
         TasksList _tasksList;
         CreateTasksForDays _createTask ;
         OpenDaysTasks _openTask ;
-        IOServices iOServices;
+
         public Form1()
         {
             InitializeComponent();
             TasksSource.tasks.ListChanged += Tasks_ListChanged;
+            comboBox2.Enter += ComboBox2_Enter;
+            dateTimePickerOpen.Enter += DateTimePickerOpen_Enter;
+            dateTimePickerCreate.Enter += DateTimePickerCreate_Enter;
+            comboBoxDay.Enter += ComboBoxDay_Enter;
         }
 
-      
+        private void ComboBoxDay_Enter(object? sender, EventArgs e)
+        {
+            label14.Visible = false;
+        }
+
+        private void DateTimePickerCreate_Enter(object? sender, EventArgs e)
+        {
+            label14.Visible = false;
+        }
+
+        private void DateTimePickerOpen_Enter(object? sender, EventArgs e)
+        {
+            label13.Visible = false;
+        }
+
+        private void ComboBox2_Enter(object? sender, EventArgs e)
+        {
+           label13.Visible= false;
+        }
+
+
+
 
 
 
@@ -68,14 +98,13 @@ namespace WorkList
                     Elements elements = new Elements();
                     elements.label.Text += textBoxNewTask.Text;
                     elements.comboBox.SelectedItem = comboBoxPriority.SelectedItem;
-                    elements.dateTimePicker.Value = dateTimePicker1.Value;
                     elements.label1.Text += textBoxTime.Text;
                     elements.label2.Text += textBoxComment.Text;
                     elements.checkBox.Checked = false;
 
                     _tasksList.AddNewTasks(elements);
-                    TasksSource.tasks.Add(new Tasks(textBoxNewTask.Text, comboBoxPriority.SelectedItem, dateTimePicker1.Value, textBoxTime.Text, textBoxComment.Text, false));
                     TasksSource.services.SaveData(TasksSource.tasks);
+                   
 
                 }));
             });
@@ -92,7 +121,7 @@ namespace WorkList
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
                 SetPanels(taskListPanel);
-            if (counter1 != 1)
+            if (counter1 == 0)
             {
                 _tasksList = new TasksList();
                 _tasksList.Show();
@@ -137,23 +166,26 @@ namespace WorkList
 
 
         ////////////////////////Search//////////////////////////////////
-        private async void startSearchButton_Click(object sender, EventArgs e)
+        private  void startSearchButton_Click(object sender, EventArgs e)
         {
-            await Task.Run(() =>
+            Elements elements = new Elements();
+            
+            if (textBox3.Text != "" && comboBox1.SelectedItem.ToString() != "")
             {
-                Invoke(new Action(() =>
-                {
-                    List<Tasks> searchedTasks;
-
-                    searchedTasks = TasksSource.tasks.Where(i => i.task == textBox3.Text || i.priority == comboBox1.SelectedItem || i.date == dateTimePicker1.Value || i.done == checkBox1.Checked).ToList();
-
+                List<Tasks> searchedTasks = TasksSource.tasks.Where(i => i.task == TasksSource.label.Text + textBox3.Text && i.priority.ToString() == comboBox1.SelectedItem.ToString() && i.done == checkBox1.Checked).ToList();
                     if (searchedTasks.Count != 0)
                     {
                         _search.OtherInicialization(searchedTasks);
                     }
-                }));
-            });
-           
+            }
+            if (textBox3.Text != "")
+            {
+                List<Tasks> searchedTasks = TasksSource.tasks.Where(i => i.task == TasksSource.label.Text + textBox3.Text  && i.done == checkBox1.Checked).ToList();
+                if (searchedTasks.Count != 0)
+                {
+                    _search.OtherInicialization(searchedTasks);
+                }
+            }
         }
 
 
@@ -161,7 +193,7 @@ namespace WorkList
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
                 SetPanels(searchPanel);
-            if (counter2 != 1)
+            if (counter2 == 0)
             {
                 _search = new Search();
                 _search.FormClosed += Search_FormClosed;
@@ -209,25 +241,32 @@ namespace WorkList
 
         private void createDayTaskListButton_Click(object sender, EventArgs e)
         {
-
-            string path = $"{Environment.CurrentDirectory}\\" + comboBoxDay.SelectedItem.ToString() + dateTimePicker2.Value.ToString() + ".json";
-            if (!File.Exists(path))
+            if (counter3 == 0)
             {
-                if (comboBoxDay.SelectedItem != null)
+
+
+                string path = $"{Environment.CurrentDirectory}\\" + comboBoxDay.SelectedItem + dateTimePickerCreate.Value.ToString().Remove(10) + ".json";
+                if (!File.Exists(path))
                 {
-                    _createTask = new CreateTasksForDays($"{Environment.CurrentDirectory}\\" + comboBoxDay.SelectedItem.ToString() + dateTimePicker2.Value.ToString() + ".json");
-                    _createTask.Show();
-                }
-            }
-            else
-            {
-                label14.Visible = true;
-                label14.Text=  "That file already exists";
-            }
 
+                    _createTask = new CreateTasksForDays($"{Environment.CurrentDirectory}\\" + comboBoxDay.SelectedItem + dateTimePickerCreate.Value.ToString().Remove(10) + ".json");
+                    _createTask.FormClosed += _createTask_FormClosed;
+                    _createTask.Show();
+
+                }
+                else
+                {
+                    label14.Visible = true;
+                    label14.Text = "That file already exists";
+                }
+                counter3++;
+            }
         }
 
-
+        private void _createTask_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            counter3--;
+        }
 
 
 
@@ -249,19 +288,28 @@ namespace WorkList
 
         private void openTaskListButton_Click(object sender, EventArgs e)
         {
-
-            if (File.Exists($"{Environment.CurrentDirectory}\\" + comboBox2.SelectedItem + dateTimePicker3.Value))
+            if (counter4 == 0)
             {
 
-            }
-            else
-            {
-                label13.Visible = true;
-                label13.Text = "That file doesn't exist";
-            }
 
+                if (File.Exists($"{Environment.CurrentDirectory}\\" + comboBox2.SelectedItem + dateTimePickerOpen.Value.ToString().Remove(10) + ".json"))
+                {
+                    _openTask = new OpenDaysTasks($"{Environment.CurrentDirectory}\\" + comboBox2.SelectedItem + dateTimePickerOpen.Value.ToString().Remove(10) + ".json");
+                    _openTask.FormClosed += _openTask_FormClosed;
+                    _openTask.Show();
+                }
+                else
+                {
+                    label13.Visible = true;
+                    label13.Text = "That file doesn't exist";
+                }
+                counter4++;
+            }
+        }
 
-            _openTask = new OpenDaysTasks();
+        private void _openTask_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            counter4--;
         }
 
 
@@ -295,8 +343,8 @@ namespace WorkList
             {
                 if (_search != null)
                 {
+                    TasksSource.services.SaveData(TasksSource.tasks);
                     _tasksList.BringToFront();
-                    TasksSource.services.SaveData(_tasksList);
                 }
             }
         }
@@ -314,9 +362,12 @@ namespace WorkList
 
         private void linkLabel5_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var doc = new Document(TasksSource.Path);
+            var doc = new Document(TasksSource.Path);         
             if(File.Exists(TasksSource.Path.Remove(5) + ".pdf")) { File.Delete(TasksSource.Path.Remove(5) + ".pdf"); }
             doc.Save(TasksSource.Path.Remove(5) + ".pdf") ;
+            MessageBox.Show("Pdf file succesfully created");
         }
+
+      
     }
 }

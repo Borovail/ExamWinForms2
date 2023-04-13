@@ -33,7 +33,7 @@ namespace WorkList.TaskElemets
             label.Size = new Size(0, 40);
             label.Text = "Task " + "\n";
             label.ForeColor = Color.DarkRed;
-
+            TasksSource.label= label;
 
             comboBox.Items.Add("High");
             comboBox.Items.Add("Average");
@@ -49,7 +49,8 @@ namespace WorkList.TaskElemets
             dateTimePicker.MinDate = new DateTime(2023, 4, 9, 0, 0, 0, 0);
             dateTimePicker.Name = "dateTimePicker";
             dateTimePicker.Size = new Size(200, 31);
-            dateTimePicker.Value = new DateTime(2023, 4, 9, 13, 13, 39, 0);
+            dateTimePicker.CustomFormat = "dd-mm-yyyy";
+            dateTimePicker.Value = DateTime.Now;
 
 
 

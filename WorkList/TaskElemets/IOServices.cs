@@ -23,7 +23,7 @@ namespace WorkList.TaskElemets
             if (!File.Exists(_path))
             {
                 File.CreateText(_path).Dispose();
-                return new BindingList<Tasks>();
+                return null;
             }
 
             using (var reader = File.OpenText(_path))
@@ -34,6 +34,47 @@ namespace WorkList.TaskElemets
             }
         }
 
+
+        //public BindingList<Elements> LoadElements()
+        //{
+        //    if (!File.Exists(_path))
+        //    {
+        //        File.CreateText(_path).Dispose();
+        //        return null;
+        //    }
+
+        //    using (var reader = File.OpenText(_path))
+        //    {
+                
+        //        var fileText = reader.ReadToEnd();
+        //        if (fileText == null) return null;
+        //         var tasks = JsonConvert.DeserializeObject<BindingList<Tasks>>(fileText);
+        //        //    BindingList<Elements> elements = new BindingList<Elements>();
+
+        //        //for (int i = 0; i < TasksSource.tasks.Count; i++)
+        //        //{
+
+                
+        //        //    Elements element = new Elements();
+        //        //    elements.label.Text = TasksSource.tasks[i].task;
+        //        //    elements.comboBox.SelectedItem = TasksSource.tasks[i].priority;
+        //        //    elements.label1.Text = TasksSource.tasks[i].time;
+        //        //    elements.label2.Text = TasksSource.tasks[i].comment;
+        //        //    elements.checkBox.Checked = TasksSource.tasks[i].done;
+
+        //        //    elements.label.TabIndex = i;
+        //        //    elements.comboBox.TabIndex = i;
+        //        //    elements.label1.TabIndex = i;
+        //        //    elements.label2.TabIndex = i;
+        //        //    elements.checkBox.TabIndex = i;
+        //        //    elements.dateTimePicker.TabIndex = i;
+
+
+
+        //        //}
+        //        return JsonConvert.DeserializeObject<BindingList<Elements>>(fileText);
+        //    }
+        //}
         public void SaveData<T>(T productsinfo)
         {
             using (StreamWriter writer = File.CreateText(_path))
@@ -42,7 +83,7 @@ namespace WorkList.TaskElemets
                 writer.WriteLine(output);
             }
         }
-
+       
 
         public  void InitPanel(TableLayoutPanel tableLayoutPanel,BindingList<Tasks> tasks)
         {           

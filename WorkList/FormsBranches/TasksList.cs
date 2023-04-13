@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using WorkList.TaskElemets;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace WorkList
 {
     public partial class TasksList : Form
     {
-        static int counterRow = 2;
+
         static int counterPosition = 0;
         public TasksList()
         {
@@ -36,8 +37,9 @@ namespace WorkList
             if (TasksSource.tasks == null)
             {
                 TasksSource.tasks = new BindingList<Tasks>();
-                
-              
+                TasksSource.elements = new BindingList<Elements>();
+
+
                 tableLayoutPanel1.Controls.Add(label1, 0, 0);
                 tableLayoutPanel1.Controls.Add(comboBox1, 1, 0);
                 tableLayoutPanel1.Controls.Add(dateTimePicker1, 2, 0);
@@ -62,7 +64,45 @@ namespace WorkList
             }
             else
             {
-                TasksSource.services.InitPanel(tableLayoutPanel1, TasksSource.tasks);
+                for (int i = 0; i < TasksSource.tasks.Count; i++)
+                {
+
+
+
+                    Elements elements = new Elements();
+                    elements.label.Text = TasksSource.tasks[i].task;
+                    elements.comboBox.SelectedItem = TasksSource.tasks[i].priority;
+                    elements.label1.Text = TasksSource.tasks[i].time;
+                    elements.label2.Text = TasksSource.tasks[i].comment;
+                    elements.checkBox.Checked = TasksSource.tasks[i].done;
+
+                    elements.label.TabIndex = i;
+                    elements.comboBox.TabIndex = i;
+                    elements.label1.TabIndex = i;
+                    elements.label2.TabIndex = i;
+                    elements.checkBox.TabIndex = i;
+                    elements.dateTimePicker.TabIndex = i;
+
+
+
+                    elements.label.DragEnter += Label_DragEnter;
+                    elements.label.MouseMove += Label_MouseMove;
+                    elements.label.MouseDown += Label_MouseDown;
+                    elements.comboBox.SelectedValueChanged += ComboBox_SelectedValueChanged;
+                    elements.dateTimePicker.ValueChanged += DateTimePicker_ValueChanged;
+                    elements.checkBox.CheckedChanged += CheckBox_CheckedChanged;
+
+                    tableLayoutPanel1.Controls.Add(elements.label, 0, i);
+                    tableLayoutPanel1.Controls.Add(elements.comboBox, 1, i);
+                    tableLayoutPanel1.Controls.Add(elements.dateTimePicker, 2, i);
+                    tableLayoutPanel1.Controls.Add(elements.label1, 3, i);
+                    tableLayoutPanel1.Controls.Add(elements.label2, 4, i);
+                    tableLayoutPanel1.Controls.Add(elements.checkBox, 5, i);
+
+                    TasksSource.elements.Add(elements);
+
+                }
+                TasksSource.counter = TasksSource.tasks.Count;
             }
             
         }
@@ -75,19 +115,35 @@ namespace WorkList
             elements.label.DragEnter += Label_DragEnter;
             elements.label.MouseMove += Label_MouseMove;
             elements.label.MouseDown += Label_MouseDown;
-          
-                    tableLayoutPanel1.Controls.Add(elements.label, 0, counterRow);
-                    tableLayoutPanel1.Controls.Add(elements.comboBox, 1, counterRow);
-                    tableLayoutPanel1.Controls.Add(elements.dateTimePicker, 2, counterRow);
-                    tableLayoutPanel1.Controls.Add(elements.label1, 3, counterRow);
-                    tableLayoutPanel1.Controls.Add(elements.label2, 4, counterRow);
-                    tableLayoutPanel1.Controls.Add(elements.checkBox, 5, counterRow);
-            
-            counterRow++;
+            elements.comboBox.SelectedValueChanged += ComboBox_SelectedValueChanged;
+            elements.dateTimePicker.ValueChanged += DateTimePicker_ValueChanged;
+            elements.checkBox.CheckedChanged += CheckBox_CheckedChanged;
+                    tableLayoutPanel1.Controls.Add(elements.label, 0, TasksSource.counter);
+                    tableLayoutPanel1.Controls.Add(elements.comboBox, 1, TasksSource.counter);
+                    tableLayoutPanel1.Controls.Add(elements.dateTimePicker, 2, TasksSource.counter);
+                    tableLayoutPanel1.Controls.Add(elements.label1, 3, TasksSource.counter);
+                    tableLayoutPanel1.Controls.Add(elements.label2, 4, TasksSource.counter);
+                    tableLayoutPanel1.Controls.Add(elements.checkBox, 5, TasksSource.counter);
 
+            TasksSource.counter++;
+            TasksSource.tasks.Add(new Tasks(elements.label.Text, elements.comboBox.SelectedItem, elements.dateTimePicker.Value, elements.label1.Text, elements.label2.Text, false));
             TasksSource.elements.Add(elements);
         }
 
+        private void CheckBox_CheckedChanged(object? sender, EventArgs e)
+        {
+            TasksSource.tasks[((CheckBox)sender).TabIndex].done = ((CheckBox)sender).Checked;
+        }
+
+        private void DateTimePicker_ValueChanged(object? sender, EventArgs e)
+        {
+            TasksSource.tasks[((DateTimePicker)sender).TabIndex].date = ((DateTimePicker)sender).Value;
+        }
+
+        private void ComboBox_SelectedValueChanged(object? sender, EventArgs e)
+        {
+            TasksSource.tasks[((ComboBox)sender).TabIndex].priority = ((ComboBox)sender).SelectedItem;
+        }
 
         private void Label_MouseDown(object? sender, MouseEventArgs e)
         {
@@ -95,7 +151,7 @@ namespace WorkList
             TasksSource.SelectedElement = TasksSource.elements.Where(i => i.label.TabIndex == ((Label)sender).TabIndex).First();
             
         }
-
+        
         private void Label_MouseMove(object? sender, MouseEventArgs e)
         {
             var label = ((Label)sender);
