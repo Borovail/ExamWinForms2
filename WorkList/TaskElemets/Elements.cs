@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace WorkList.TaskElemets
 {
@@ -18,12 +19,13 @@ namespace WorkList.TaskElemets
         public Elements()
         {
 
-            
-           
-            
-         
-           
-           
+            label.TabIndex = TasksSource.counter;
+            comboBox.TabIndex = TasksSource.counter;
+            dateTimePicker.TabIndex = TasksSource.counter;
+            label1.TabIndex = TasksSource.counter;
+            label2.TabIndex = TasksSource.counter;
+            checkBox.TabIndex = TasksSource.counter;
+
 
             label.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label.AutoSize = true;
@@ -78,6 +80,14 @@ namespace WorkList.TaskElemets
             label2.Text = "Comments:\n";
         }
 
-
+       public Elements(Label _label,ComboBox _comboBox ,DateTimePicker _dateTimePicker ,Label _label1 ,CheckBox _checkBox ,Label _label2 )
+        {
+            label = _label;
+            comboBox = _comboBox;
+            dateTimePicker= _dateTimePicker;
+            label1= _label1;
+            label2= _label2;
+            checkBox= _checkBox;
+        }
     }
 }

@@ -29,6 +29,7 @@ namespace WorkList.TaskElemets
             using (var reader = File.OpenText(_path))
             {
                 var fileText = reader.ReadToEnd();
+                if (fileText == null) return null;
                 return JsonConvert.DeserializeObject<BindingList<Tasks>>(fileText);
             }
         }

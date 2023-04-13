@@ -53,6 +53,7 @@
             this.textBoxNewTask = new System.Windows.Forms.TextBox();
             this.addNewTaskButton = new System.Windows.Forms.Button();
             this.createTaskListPanel = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.createDayTaskListButton = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
@@ -68,7 +69,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.linkLabel5 = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             this.openTaskListPanel.SuspendLayout();
             this.taskListPanel.SuspendLayout();
@@ -94,6 +95,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.linkLabel5);
             this.panel1.Controls.Add(this.linkLabel2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.linkLabel4);
@@ -108,7 +110,7 @@
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(3, 290);
+            this.linkLabel2.Location = new System.Drawing.Point(3, 269);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(130, 50);
             this.linkLabel2.TabIndex = 6;
@@ -129,7 +131,7 @@
             // linkLabel4
             // 
             this.linkLabel4.AutoSize = true;
-            this.linkLabel4.Location = new System.Drawing.Point(3, 215);
+            this.linkLabel4.Location = new System.Drawing.Point(3, 191);
             this.linkLabel4.Name = "linkLabel4";
             this.linkLabel4.Size = new System.Drawing.Size(136, 50);
             this.linkLabel4.TabIndex = 4;
@@ -140,7 +142,7 @@
             // linkLabel3
             // 
             this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(3, 141);
+            this.linkLabel3.Location = new System.Drawing.Point(3, 132);
             this.linkLabel3.Name = "linkLabel3";
             this.linkLabel3.Size = new System.Drawing.Size(98, 25);
             this.linkLabel3.TabIndex = 3;
@@ -166,9 +168,9 @@
             this.openTaskListPanel.Controls.Add(this.openTaskListButton);
             this.openTaskListPanel.Controls.Add(this.comboBox2);
             this.openTaskListPanel.Controls.Add(this.label11);
-            this.openTaskListPanel.Location = new System.Drawing.Point(498, 317);
+            this.openTaskListPanel.Location = new System.Drawing.Point(435, 242);
             this.openTaskListPanel.Name = "openTaskListPanel";
-            this.openTaskListPanel.Size = new System.Drawing.Size(300, 121);
+            this.openTaskListPanel.Size = new System.Drawing.Size(363, 196);
             this.openTaskListPanel.TabIndex = 5;
             this.openTaskListPanel.Visible = false;
             // 
@@ -237,9 +239,9 @@
             this.taskListPanel.Controls.Add(this.label3);
             this.taskListPanel.Controls.Add(this.textBoxNewTask);
             this.taskListPanel.Controls.Add(this.addNewTaskButton);
-            this.taskListPanel.Location = new System.Drawing.Point(385, 12);
+            this.taskListPanel.Location = new System.Drawing.Point(167, -1);
             this.taskListPanel.Name = "taskListPanel";
-            this.taskListPanel.Size = new System.Drawing.Size(192, 57);
+            this.taskListPanel.Size = new System.Drawing.Size(630, 448);
             this.taskListPanel.TabIndex = 2;
             this.taskListPanel.Visible = false;
             // 
@@ -314,7 +316,7 @@
             // 
             // addNewTaskButton
             // 
-            this.addNewTaskButton.Location = new System.Drawing.Point(230, 292);
+            this.addNewTaskButton.Location = new System.Drawing.Point(137, 292);
             this.addNewTaskButton.Name = "addNewTaskButton";
             this.addNewTaskButton.Size = new System.Drawing.Size(125, 81);
             this.addNewTaskButton.TabIndex = 10;
@@ -329,11 +331,20 @@
             this.createTaskListPanel.Controls.Add(this.createDayTaskListButton);
             this.createTaskListPanel.Controls.Add(this.label10);
             this.createTaskListPanel.Controls.Add(this.comboBoxDay);
-            this.createTaskListPanel.Location = new System.Drawing.Point(156, 1);
+            this.createTaskListPanel.Location = new System.Drawing.Point(370, 242);
             this.createTaskListPanel.Name = "createTaskListPanel";
-            this.createTaskListPanel.Size = new System.Drawing.Size(658, 475);
+            this.createTaskListPanel.Size = new System.Drawing.Size(444, 234);
             this.createTaskListPanel.TabIndex = 4;
             this.createTaskListPanel.Visible = false;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(315, 36);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(0, 25);
+            this.label14.TabIndex = 4;
+            this.label14.Visible = false;
             // 
             // dateTimePicker2
             // 
@@ -490,25 +501,27 @@
             this.label9.TabIndex = 12;
             this.label9.Text = "Task\'s name";
             // 
-            // label14
+            // linkLabel5
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(315, 36);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(0, 25);
-            this.label14.TabIndex = 4;
-            this.label14.Visible = false;
+            this.linkLabel5.AutoSize = true;
+            this.linkLabel5.Location = new System.Drawing.Point(3, 348);
+            this.linkLabel5.Name = "linkLabel5";
+            this.linkLabel5.Size = new System.Drawing.Size(131, 50);
+            this.linkLabel5.TabIndex = 7;
+            this.linkLabel5.TabStop = true;
+            this.linkLabel5.Text = "Save current \r\nTask List to pdf";
+            this.linkLabel5.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel5_LinkClicked);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.taskListPanel);
             this.Controls.Add(this.openTaskListPanel);
             this.Controls.Add(this.createTaskListPanel);
             this.Controls.Add(this.searchPanel);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.taskListPanel);
             this.Name = "Form1";
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
@@ -567,5 +580,6 @@
         private DateTimePicker dateTimePicker3;
         private Label label13;
         private Label label14;
+        private LinkLabel linkLabel5;
     }
 }

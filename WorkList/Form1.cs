@@ -75,12 +75,14 @@ namespace WorkList
 
             _tasksList.AddNewTasks(elements);
             TasksSource.tasks.Add(new Tasks(textBoxNewTask.Text, comboBoxPriority.SelectedItem, dateTimePicker1.Value, textBoxTime.Text, textBoxComment.Text, false));
+            TasksSource.services.SaveData(TasksSource.tasks);
+
         }
 
 
 
 
-    
+
 
 
 
@@ -98,6 +100,7 @@ namespace WorkList
 
         private void _tasksList_FormClosed1(object? sender, FormClosedEventArgs e)
         {
+            TasksSource.services.SaveData(TasksSource.tasks);
             counter1--;
         }
 
@@ -198,12 +201,12 @@ namespace WorkList
         private void createDayTaskListButton_Click(object sender, EventArgs e)
         {
 
-            string path = $"{Environment.CurrentDirectory}\\" + comboBoxDay.SelectedItem.ToString() + dateTimePicker2.Value.ToString() + "json";
+            string path = $"{Environment.CurrentDirectory}\\" + comboBoxDay.SelectedItem.ToString() + dateTimePicker2.Value.ToString() + ".json";
             if (!File.Exists(path))
             {
                 if (comboBoxDay.SelectedItem != null)
                 {
-                    _createTask = new CreateTasksForDays($"{Environment.CurrentDirectory}\\" + comboBoxDay.SelectedItem.ToString() + dateTimePicker2.Value.ToString() + "json");
+                    _createTask = new CreateTasksForDays($"{Environment.CurrentDirectory}\\" + comboBoxDay.SelectedItem.ToString() + dateTimePicker2.Value.ToString() + ".json");
                     _createTask.Show();
                 }
             }
@@ -300,6 +303,11 @@ namespace WorkList
             panel.Visible = true;
         }
 
-       
+        private void linkLabel5_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var doc = new Document(TasksSource.Path);
+            if(File.Exists(TasksSource.Path.Remove(5) + ".pdf")) { File.Delete(TasksSource.Path.Remove(5) + ".pdf"); }
+            doc.Save(TasksSource.Path.Remove(5) + ".pdf") ;
+        }
     }
 }
