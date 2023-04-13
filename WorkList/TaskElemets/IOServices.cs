@@ -1,0 +1,128 @@
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WorkList.TaskElemets
+{
+    internal class IOServices
+    {
+        private readonly string _path;
+
+        public IOServices(string path)
+        {
+            _path = path;
+        }
+
+        public BindingList<Tasks> LoadData()
+        {
+            if (!File.Exists(_path))
+            {
+                File.CreateText(_path).Dispose();
+                return null;
+            }
+
+            using (var reader = File.OpenText(_path))
+            {
+                var fileText = reader.ReadToEnd();
+                if (fileText == null) return null;
+                return JsonConvert.DeserializeObject<BindingList<Tasks>>(fileText);
+            }
+        }
+
+
+        //public BindingList<Elements> LoadElements()
+        //{
+        //    if (!File.Exists(_path))
+        //    {
+        //        File.CreateText(_path).Dispose();
+        //        return null;
+        //    }
+
+        //    using (var reader = File.OpenText(_path))
+        //    {
+                
+        //        var fileText = reader.ReadToEnd();
+        //        if (fileText == null) return null;
+        //         var tasks = JsonConvert.DeserializeObject<BindingList<Tasks>>(fileText);
+        //        //    BindingList<Elements> elements = new BindingList<Elements>();
+
+        //        //for (int i = 0; i < TasksSource.tasks.Count; i++)
+        //        //{
+
+                
+        //        //    Elements element = new Elements();
+        //        //    elements.label.Text = TasksSource.tasks[i].task;
+        //        //    elements.comboBox.SelectedItem = TasksSource.tasks[i].priority;
+        //        //    elements.label1.Text = TasksSource.tasks[i].time;
+        //        //    elements.label2.Text = TasksSource.tasks[i].comment;
+        //        //    elements.checkBox.Checked = TasksSource.tasks[i].done;
+
+        //        //    elements.label.TabIndex = i;
+        //        //    elements.comboBox.TabIndex = i;
+        //        //    elements.label1.TabIndex = i;
+        //        //    elements.label2.TabIndex = i;
+        //        //    elements.checkBox.TabIndex = i;
+        //        //    elements.dateTimePicker.TabIndex = i;
+
+
+
+        //        //}
+        //        return JsonConvert.DeserializeObject<BindingList<Elements>>(fileText);
+        //    }
+        //}
+        public void SaveData<T>(T productsinfo)
+        {
+            using (StreamWriter writer = File.CreateText(_path))
+            {
+                string output = JsonConvert.SerializeObject(productsinfo);
+                writer.WriteLine(output);
+            }
+        }
+       
+
+        public  void InitPanel(TableLayoutPanel tableLayoutPanel,BindingList<Tasks> tasks)
+        {           
+                    for (int i = 0; i < tasks.Count; i++)
+                    {
+                        Elements elements = new Elements();
+
+                        elements.label.Text = tasks[i].task;
+                        elements.comboBox.SelectedItem = tasks[i].priority;
+                        elements.dateTimePicker.Value = tasks[i].date;
+                        elements.label1.Text = tasks[i].time;
+                        elements.label2.Text = tasks[i].comment;
+                        elements.checkBox.Checked = tasks[i].done;
+
+                        tableLayoutPanel.Controls.Add(elements.label, 0, i);
+                        tableLayoutPanel.Controls.Add(elements.comboBox, 1, i);
+                        tableLayoutPanel.Controls.Add(elements.dateTimePicker, 2, i);
+                        tableLayoutPanel.Controls.Add(elements.label1, 3, i);
+                        tableLayoutPanel.Controls.Add(elements.label2, 4, i);
+                        tableLayoutPanel.Controls.Add(elements.checkBox, 5, i);
+                    }                      
+        }
+
+
+        public void SetLayoutPanelSize(TableLayoutPanel tableLayoutPanel)
+        {
+            tableLayoutPanel.ColumnStyles[4].SizeType = SizeType.Absolute;
+            tableLayoutPanel.ColumnStyles[4].Width = 120;
+            tableLayoutPanel.ColumnStyles[5].SizeType = SizeType.Absolute;
+            tableLayoutPanel.ColumnStyles[5].Width = 120;
+            tableLayoutPanel.ColumnStyles[3].SizeType = SizeType.Absolute;
+            tableLayoutPanel.ColumnStyles[3].Width = 200;
+            tableLayoutPanel.ColumnStyles[2].SizeType = SizeType.Absolute;
+            tableLayoutPanel.ColumnStyles[2].Width = 200;
+            tableLayoutPanel.ColumnStyles[0].SizeType = SizeType.Absolute;
+            tableLayoutPanel.ColumnStyles[0].Width = 250;
+            //tableLayoutPanel.ColumnStyles[6].SizeType = SizeType.Absolute;
+            //tableLayoutPanel.ColumnStyles[6].Width = 100;
+        }
+
+    }
+}
