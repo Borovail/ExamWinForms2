@@ -58,7 +58,7 @@ namespace WorkList
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66774F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66774F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66127F));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 1);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -101,11 +101,11 @@ namespace WorkList
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePicker1.Location = new System.Drawing.Point(0, 0);
-            this.dateTimePicker1.MinDate = new System.DateTime(2023, 4, 9, 0, 0, 0, 0);
+            this.dateTimePicker1.MinDate = new System.DateTime(2023, 4, 13, 11, 50, 4, 616);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 31);
             this.dateTimePicker1.TabIndex = 12;
-            this.dateTimePicker1.Value = DateTime.Now;
+            this.dateTimePicker1.Value = new System.DateTime(2023, 4, 13, 11, 50, 4, 617);
             // 
             // label2
             // 
@@ -149,11 +149,11 @@ namespace WorkList
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePicker2.Location = new System.Drawing.Point(0, 0);
-            this.dateTimePicker2.MinDate = new System.DateTime(2023, 4, 9, 0, 0, 0, 0);
+            this.dateTimePicker2.MinDate = new System.DateTime(2023, 4, 13, 11, 50, 4, 619);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(200, 31);
             this.dateTimePicker2.TabIndex = 12;
-            this.dateTimePicker2.Value = DateTime.Now;
+            this.dateTimePicker2.Value = new System.DateTime(2023, 4, 13, 11, 50, 4, 619);
             // 
             // comboBox2
             // 
@@ -226,7 +226,6 @@ namespace WorkList
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1462, 526);
-
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "TasksList";
             this.Text = "TasksList";

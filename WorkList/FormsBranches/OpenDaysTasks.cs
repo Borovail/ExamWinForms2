@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace WorkList
 {
-    public partial class OpenTaskForDay : Form
+    public partial class OpenDaysTasks : Form
     {
-        public OpenTaskForDay()
+        public OpenDaysTasks()
         {
             InitializeComponent();
         }

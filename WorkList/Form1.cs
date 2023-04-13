@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Linq;
 using WorkList.TaskElemets;
-
+using Aspose.Words;
 namespace WorkList
 {
     public partial class Form1 : Form
@@ -10,14 +10,19 @@ namespace WorkList
         static int counter2 = 0;
         Search _search;
         TasksList _tasksList;
-        CreateTaskForDay _taskForDay ;
-        OpenTaskForDay _openTask ;
-
+        CreateTasksForDays _createTask ;
+        OpenDaysTasks _openTask ;
+        IOServices iOServices;
         public Form1()
         {
             InitializeComponent();
             TasksSource.tasks.ListChanged += Tasks_ListChanged;
+
+            var doc = new Document($"{Environment.CurrentDirectory}\\Tasks.json");
+            doc.Save("Tasks.pdf");
         }
+
+      
 
 
 
@@ -193,6 +198,21 @@ namespace WorkList
         private void createDayTaskListButton_Click(object sender, EventArgs e)
         {
 
+            string path = $"{Environment.CurrentDirectory}\\" + comboBoxDay.SelectedItem.ToString() + dateTimePicker2.Value.ToString() + "json";
+            if (!File.Exists(path))
+            {
+                if (comboBoxDay.SelectedItem != null)
+                {
+                    _createTask = new CreateTasksForDays($"{Environment.CurrentDirectory}\\" + comboBoxDay.SelectedItem.ToString() + dateTimePicker2.Value.ToString() + "json");
+                    _createTask.Show();
+                }
+            }
+            else
+            {
+                label14.Visible = true;
+                label14.Text=  "That file already exists";
+            }
+
         }
 
 
@@ -215,7 +235,22 @@ namespace WorkList
             SetPanels(openTaskListPanel);
         }
 
+        private void openTaskListButton_Click(object sender, EventArgs e)
+        {
 
+            if (File.Exists($"{Environment.CurrentDirectory}\\" + comboBox2.SelectedItem + dateTimePicker3.Value))
+            {
+
+            }
+            else
+            {
+                label13.Visible = true;
+                label13.Text = "That file doesn't exist";
+            }
+
+
+            _openTask = new OpenDaysTasks();
+        }
 
 
 

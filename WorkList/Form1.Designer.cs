@@ -37,6 +37,8 @@
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.openTaskListPanel = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.openTaskListButton = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -51,6 +53,7 @@
             this.textBoxNewTask = new System.Windows.Forms.TextBox();
             this.addNewTaskButton = new System.Windows.Forms.Button();
             this.createTaskListPanel = new System.Windows.Forms.Panel();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.createDayTaskListButton = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.comboBoxDay = new System.Windows.Forms.ComboBox();
@@ -65,6 +68,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.openTaskListPanel.SuspendLayout();
             this.taskListPanel.SuspendLayout();
@@ -157,14 +161,32 @@
             // 
             // openTaskListPanel
             // 
+            this.openTaskListPanel.Controls.Add(this.label13);
+            this.openTaskListPanel.Controls.Add(this.dateTimePicker3);
             this.openTaskListPanel.Controls.Add(this.openTaskListButton);
             this.openTaskListPanel.Controls.Add(this.comboBox2);
             this.openTaskListPanel.Controls.Add(this.label11);
-            this.openTaskListPanel.Location = new System.Drawing.Point(167, 255);
+            this.openTaskListPanel.Location = new System.Drawing.Point(498, 317);
             this.openTaskListPanel.Name = "openTaskListPanel";
-            this.openTaskListPanel.Size = new System.Drawing.Size(26, 67);
+            this.openTaskListPanel.Size = new System.Drawing.Size(300, 121);
             this.openTaskListPanel.TabIndex = 5;
             this.openTaskListPanel.Visible = false;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(315, 42);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(0, 25);
+            this.label13.TabIndex = 7;
+            this.label13.Visible = false;
+            // 
+            // dateTimePicker3
+            // 
+            this.dateTimePicker3.Location = new System.Drawing.Point(348, 167);
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.Size = new System.Drawing.Size(223, 31);
+            this.dateTimePicker3.TabIndex = 6;
             // 
             // openTaskListButton
             // 
@@ -174,6 +196,7 @@
             this.openTaskListButton.TabIndex = 5;
             this.openTaskListButton.Text = "Open";
             this.openTaskListButton.UseVisualStyleBackColor = true;
+            this.openTaskListButton.Click += new System.EventHandler(this.openTaskListButton_Click);
             // 
             // comboBox2
             // 
@@ -186,7 +209,7 @@
             "Friday",
             "Saturday",
             "Sunday"});
-            this.comboBox2.Location = new System.Drawing.Point(225, 164);
+            this.comboBox2.Location = new System.Drawing.Point(130, 165);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(182, 33);
             this.comboBox2.TabIndex = 3;
@@ -214,9 +237,9 @@
             this.taskListPanel.Controls.Add(this.label3);
             this.taskListPanel.Controls.Add(this.textBoxNewTask);
             this.taskListPanel.Controls.Add(this.addNewTaskButton);
-            this.taskListPanel.Location = new System.Drawing.Point(520, -1);
+            this.taskListPanel.Location = new System.Drawing.Point(385, 12);
             this.taskListPanel.Name = "taskListPanel";
-            this.taskListPanel.Size = new System.Drawing.Size(282, 55);
+            this.taskListPanel.Size = new System.Drawing.Size(192, 57);
             this.taskListPanel.TabIndex = 2;
             this.taskListPanel.Visible = false;
             // 
@@ -301,14 +324,25 @@
             // 
             // createTaskListPanel
             // 
+            this.createTaskListPanel.Controls.Add(this.label14);
+            this.createTaskListPanel.Controls.Add(this.dateTimePicker2);
             this.createTaskListPanel.Controls.Add(this.createDayTaskListButton);
             this.createTaskListPanel.Controls.Add(this.label10);
             this.createTaskListPanel.Controls.Add(this.comboBoxDay);
-            this.createTaskListPanel.Location = new System.Drawing.Point(182, 1);
+            this.createTaskListPanel.Location = new System.Drawing.Point(156, 1);
             this.createTaskListPanel.Name = "createTaskListPanel";
-            this.createTaskListPanel.Size = new System.Drawing.Size(620, 412);
+            this.createTaskListPanel.Size = new System.Drawing.Size(658, 475);
             this.createTaskListPanel.TabIndex = 4;
             this.createTaskListPanel.Visible = false;
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(332, 147);
+            this.dateTimePicker2.MinDate = new System.DateTime(2023, 4, 13, 11, 59, 36, 200);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(216, 31);
+            this.dateTimePicker2.TabIndex = 3;
+            this.dateTimePicker2.Value = new System.DateTime(2023, 4, 13, 11, 59, 36, 203);
             // 
             // createDayTaskListButton
             // 
@@ -340,7 +374,7 @@
             "Friday",
             "Saturday",
             "Sunday"});
-            this.comboBoxDay.Location = new System.Drawing.Point(233, 124);
+            this.comboBoxDay.Location = new System.Drawing.Point(121, 145);
             this.comboBoxDay.Name = "comboBoxDay";
             this.comboBoxDay.Size = new System.Drawing.Size(182, 33);
             this.comboBoxDay.TabIndex = 0;
@@ -376,10 +410,11 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Location = new System.Drawing.Point(319, 295);
-            this.dateTimePicker1.MinDate = new System.DateTime(2023, 4, 12, 11, 9, 0, 0);
+            this.dateTimePicker1.MinDate = new System.DateTime(2023, 4, 13, 11, 59, 36, 207);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(206, 31);
             this.dateTimePicker1.TabIndex = 20;
+            this.dateTimePicker1.Value = new System.DateTime(2023, 4, 13, 11, 59, 36, 207);
             // 
             // label2
             // 
@@ -455,14 +490,23 @@
             this.label9.TabIndex = 12;
             this.label9.Text = "Task\'s name";
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(315, 36);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(0, 25);
+            this.label14.TabIndex = 4;
+            this.label14.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.openTaskListPanel);
-            this.Controls.Add(this.searchPanel);
             this.Controls.Add(this.createTaskListPanel);
+            this.Controls.Add(this.searchPanel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.taskListPanel);
             this.Name = "Form1";
@@ -519,5 +563,9 @@
         private ComboBox comboBox2;
         private Label label12;
         private ComboBox comboBoxPriority;
+        private DateTimePicker dateTimePicker2;
+        private DateTimePicker dateTimePicker3;
+        private Label label13;
+        private Label label14;
     }
 }
