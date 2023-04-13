@@ -17,9 +17,6 @@ namespace WorkList
         {
             InitializeComponent();
             TasksSource.tasks.ListChanged += Tasks_ListChanged;
-
-            var doc = new Document($"{Environment.CurrentDirectory}\\Tasks.json");
-            doc.Save("Tasks.pdf");
         }
 
       
@@ -35,7 +32,7 @@ namespace WorkList
 
         private void label1_Click(object sender, EventArgs e)
         {
-            panel1.Size = new Size(button1.Width + 5, button1.Height + 5);
+            panel1.Size = new Size(button1.Width, button1.Height);
         }
 
 
@@ -62,21 +59,27 @@ namespace WorkList
 
 
         ////////////////////////TaskList///////////////////////////////
-        private void addNewTaskButton_Click(object sender, EventArgs e)
+        private async void addNewTaskButton_Click(object sender, EventArgs e)
         {
+            await Task.Run(() =>
+            {
+                Invoke(new Action(() =>
+                {
+                    Elements elements = new Elements();
+                    elements.label.Text += textBoxNewTask.Text;
+                    elements.comboBox.SelectedItem = comboBoxPriority.SelectedItem;
+                    elements.dateTimePicker.Value = dateTimePicker1.Value;
+                    elements.label1.Text += textBoxTime.Text;
+                    elements.label2.Text += textBoxComment.Text;
+                    elements.checkBox.Checked = false;
 
-            Elements elements = new Elements();
-            elements.label.Text += textBoxNewTask.Text;
-            elements.comboBox.SelectedItem = comboBoxPriority.SelectedItem;
-            elements.dateTimePicker.Value = dateTimePicker1.Value;
-            elements.label1.Text += textBoxTime.Text;
-            elements.label2.Text += textBoxComment.Text;
-            elements.checkBox.Checked = false;
+                    _tasksList.AddNewTasks(elements);
+                    TasksSource.tasks.Add(new Tasks(textBoxNewTask.Text, comboBoxPriority.SelectedItem, dateTimePicker1.Value, textBoxTime.Text, textBoxComment.Text, false));
+                    TasksSource.services.SaveData(TasksSource.tasks);
 
-            _tasksList.AddNewTasks(elements);
-            TasksSource.tasks.Add(new Tasks(textBoxNewTask.Text, comboBoxPriority.SelectedItem, dateTimePicker1.Value, textBoxTime.Text, textBoxComment.Text, false));
-            TasksSource.services.SaveData(TasksSource.tasks);
-
+                }));
+            });
+           
         }
 
 
@@ -134,17 +137,23 @@ namespace WorkList
 
 
         ////////////////////////Search//////////////////////////////////
-        private void startSearchButton_Click(object sender, EventArgs e)
+        private async void startSearchButton_Click(object sender, EventArgs e)
         {
-            List<Tasks> searchedTasks;
-
-            searchedTasks = TasksSource.tasks.Where(i => i.task == textBox3.Text || i.priority == comboBox1.SelectedItem || i.date == dateTimePicker1.Value || i.done == checkBox1.Checked).ToList();
-
-            if (searchedTasks.Count != 0)
+            await Task.Run(() =>
             {
-                _search.OtherInicialization(searchedTasks);
-            }
+                Invoke(new Action(() =>
+                {
+                    List<Tasks> searchedTasks;
 
+                    searchedTasks = TasksSource.tasks.Where(i => i.task == textBox3.Text || i.priority == comboBox1.SelectedItem || i.date == dateTimePicker1.Value || i.done == checkBox1.Checked).ToList();
+
+                    if (searchedTasks.Count != 0)
+                    {
+                        _search.OtherInicialization(searchedTasks);
+                    }
+                }));
+            });
+           
         }
 
 

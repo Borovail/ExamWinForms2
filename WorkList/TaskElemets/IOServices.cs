@@ -45,26 +45,25 @@ namespace WorkList.TaskElemets
 
 
         public  void InitPanel(TableLayoutPanel tableLayoutPanel,BindingList<Tasks> tasks)
-        {
-            
-                for (int i = 0; i < tasks.Count; i++)
-                {
-                    Elements elements = new Elements();
+        {           
+                    for (int i = 0; i < tasks.Count; i++)
+                    {
+                        Elements elements = new Elements();
 
-                    elements.label.Text = tasks[i].task;
-                    elements.comboBox.SelectedItem = tasks[i].priority;
-                    elements.dateTimePicker.Value = tasks[i].date;
-                    elements.label1.Text = tasks[i].time;
-                    elements.label2.Text = tasks[i].comment;
-                    elements.checkBox.Checked = tasks[i].done;
+                        elements.label.Text = tasks[i].task;
+                        elements.comboBox.SelectedItem = tasks[i].priority;
+                        elements.dateTimePicker.Value = tasks[i].date;
+                        elements.label1.Text = tasks[i].time;
+                        elements.label2.Text = tasks[i].comment;
+                        elements.checkBox.Checked = tasks[i].done;
 
-                    tableLayoutPanel.Controls.Add(elements.label, 0, i);
-                    tableLayoutPanel.Controls.Add(elements.comboBox, 1, i);
-                    tableLayoutPanel.Controls.Add(elements.dateTimePicker, 2, i);
-                    tableLayoutPanel.Controls.Add(elements.label1, 3, i);
-                    tableLayoutPanel.Controls.Add(elements.label2, 4, i);
-                    tableLayoutPanel.Controls.Add(elements.checkBox, 5, i);
-                }
+                        tableLayoutPanel.Controls.Add(elements.label, 0, i);
+                        tableLayoutPanel.Controls.Add(elements.comboBox, 1, i);
+                        tableLayoutPanel.Controls.Add(elements.dateTimePicker, 2, i);
+                        tableLayoutPanel.Controls.Add(elements.label1, 3, i);
+                        tableLayoutPanel.Controls.Add(elements.label2, 4, i);
+                        tableLayoutPanel.Controls.Add(elements.checkBox, 5, i);
+                    }                      
         }
 
 

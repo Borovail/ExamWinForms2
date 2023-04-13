@@ -32,7 +32,7 @@ namespace WorkList.TaskElemets
             label.Name = "label";
             label.Size = new Size(0, 40);
             label.Text = "Task " + "\n";
-
+            label.ForeColor = Color.DarkRed;
 
 
             comboBox.Items.Add("High");
@@ -59,6 +59,7 @@ namespace WorkList.TaskElemets
             label1.Name = "labell";
             label1.Size = new Size(0, 40);
             label1.Text = "Planned time for \nsolve the task(min): \n";
+            label1.ForeColor = Color.OrangeRed;
 
 
 
@@ -70,7 +71,7 @@ namespace WorkList.TaskElemets
             checkBox.Size = new Size(89, 29);
             checkBox.Text = "Done?";
             checkBox.UseVisualStyleBackColor = true;
-
+            checkBox.ForeColor= Color.Orange;
 
 
             label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
@@ -78,6 +79,7 @@ namespace WorkList.TaskElemets
             label2.Name = "labelll";
             label2.Size = new Size(0, 40);
             label2.Text = "Comments:\n";
+            label2.ForeColor = Color.MediumVioletRed;
         }
 
        public Elements(Label _label,ComboBox _comboBox ,DateTimePicker _dateTimePicker ,Label _label1 ,CheckBox _checkBox ,Label _label2 )

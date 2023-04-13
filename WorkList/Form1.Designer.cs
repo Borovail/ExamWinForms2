@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.linkLabel5 = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
@@ -69,7 +70,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.linkLabel5 = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             this.openTaskListPanel.SuspendLayout();
             this.taskListPanel.SuspendLayout();
@@ -82,11 +82,11 @@
             this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Location = new System.Drawing.Point(-2, -2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(51, 55);
             this.button1.TabIndex = 0;
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel1
@@ -94,6 +94,8 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.linkLabel5);
             this.panel1.Controls.Add(this.linkLabel2);
@@ -107,10 +109,23 @@
             this.panel1.Size = new System.Drawing.Size(162, 450);
             this.panel1.TabIndex = 1;
             // 
+            // linkLabel5
+            // 
+            this.linkLabel5.AutoSize = true;
+            this.linkLabel5.BackColor = System.Drawing.SystemColors.InfoText;
+            this.linkLabel5.Location = new System.Drawing.Point(11, 335);
+            this.linkLabel5.Name = "linkLabel5";
+            this.linkLabel5.Size = new System.Drawing.Size(131, 50);
+            this.linkLabel5.TabIndex = 7;
+            this.linkLabel5.TabStop = true;
+            this.linkLabel5.Text = "Save current \r\nTask List to pdf";
+            this.linkLabel5.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel5_LinkClicked);
+            // 
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(3, 269);
+            this.linkLabel2.BackColor = System.Drawing.SystemColors.InfoText;
+            this.linkLabel2.Location = new System.Drawing.Point(11, 258);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(130, 50);
             this.linkLabel2.TabIndex = 6;
@@ -121,7 +136,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 417);
+            this.label1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label1.Location = new System.Drawing.Point(31, 415);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 25);
             this.label1.TabIndex = 5;
@@ -131,7 +147,8 @@
             // linkLabel4
             // 
             this.linkLabel4.AutoSize = true;
-            this.linkLabel4.Location = new System.Drawing.Point(3, 191);
+            this.linkLabel4.BackColor = System.Drawing.SystemColors.InfoText;
+            this.linkLabel4.Location = new System.Drawing.Point(11, 172);
             this.linkLabel4.Name = "linkLabel4";
             this.linkLabel4.Size = new System.Drawing.Size(136, 50);
             this.linkLabel4.TabIndex = 4;
@@ -142,7 +159,8 @@
             // linkLabel3
             // 
             this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(3, 132);
+            this.linkLabel3.BackColor = System.Drawing.SystemColors.InfoText;
+            this.linkLabel3.Location = new System.Drawing.Point(11, 125);
             this.linkLabel3.Name = "linkLabel3";
             this.linkLabel3.Size = new System.Drawing.Size(98, 25);
             this.linkLabel3.TabIndex = 3;
@@ -153,7 +171,8 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(3, 83);
+            this.linkLabel1.BackColor = System.Drawing.SystemColors.InfoText;
+            this.linkLabel1.Location = new System.Drawing.Point(11, 76);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(76, 25);
             this.linkLabel1.TabIndex = 1;
@@ -239,9 +258,9 @@
             this.taskListPanel.Controls.Add(this.label3);
             this.taskListPanel.Controls.Add(this.textBoxNewTask);
             this.taskListPanel.Controls.Add(this.addNewTaskButton);
-            this.taskListPanel.Location = new System.Drawing.Point(167, -1);
+            this.taskListPanel.Location = new System.Drawing.Point(491, 295);
             this.taskListPanel.Name = "taskListPanel";
-            this.taskListPanel.Size = new System.Drawing.Size(630, 448);
+            this.taskListPanel.Size = new System.Drawing.Size(306, 152);
             this.taskListPanel.TabIndex = 2;
             this.taskListPanel.Visible = false;
             // 
@@ -326,14 +345,16 @@
             // 
             // createTaskListPanel
             // 
+            this.createTaskListPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("createTaskListPanel.BackgroundImage")));
+            this.createTaskListPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.createTaskListPanel.Controls.Add(this.label14);
             this.createTaskListPanel.Controls.Add(this.dateTimePicker2);
             this.createTaskListPanel.Controls.Add(this.createDayTaskListButton);
             this.createTaskListPanel.Controls.Add(this.label10);
             this.createTaskListPanel.Controls.Add(this.comboBoxDay);
-            this.createTaskListPanel.Location = new System.Drawing.Point(370, 242);
+            this.createTaskListPanel.Location = new System.Drawing.Point(311, -39);
             this.createTaskListPanel.Name = "createTaskListPanel";
-            this.createTaskListPanel.Size = new System.Drawing.Size(444, 234);
+            this.createTaskListPanel.Size = new System.Drawing.Size(424, 275);
             this.createTaskListPanel.TabIndex = 4;
             this.createTaskListPanel.Visible = false;
             // 
@@ -348,7 +369,7 @@
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(332, 147);
+            this.dateTimePicker2.Location = new System.Drawing.Point(344, 176);
             this.dateTimePicker2.MinDate = new System.DateTime(2023, 4, 13, 11, 59, 36, 200);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(216, 31);
@@ -357,18 +378,21 @@
             // 
             // createDayTaskListButton
             // 
-            this.createDayTaskListButton.Location = new System.Drawing.Point(253, 287);
+            this.createDayTaskListButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.createDayTaskListButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.createDayTaskListButton.Location = new System.Drawing.Point(237, 267);
             this.createDayTaskListButton.Name = "createDayTaskListButton";
-            this.createDayTaskListButton.Size = new System.Drawing.Size(112, 34);
+            this.createDayTaskListButton.Size = new System.Drawing.Size(144, 61);
             this.createDayTaskListButton.TabIndex = 2;
             this.createDayTaskListButton.Text = "Create";
-            this.createDayTaskListButton.UseVisualStyleBackColor = true;
+            this.createDayTaskListButton.UseVisualStyleBackColor = false;
             this.createDayTaskListButton.Click += new System.EventHandler(this.createDayTaskListButton_Click);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(169, 56);
+            this.label10.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label10.Location = new System.Drawing.Point(158, 78);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(324, 25);
             this.label10.TabIndex = 1;
@@ -376,6 +400,8 @@
             // 
             // comboBoxDay
             // 
+            this.comboBoxDay.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.comboBoxDay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxDay.FormattingEnabled = true;
             this.comboBoxDay.Items.AddRange(new object[] {
             "Monday",
@@ -385,7 +411,7 @@
             "Friday",
             "Saturday",
             "Sunday"});
-            this.comboBoxDay.Location = new System.Drawing.Point(121, 145);
+            this.comboBoxDay.Location = new System.Drawing.Point(94, 174);
             this.comboBoxDay.Name = "comboBoxDay";
             this.comboBoxDay.Size = new System.Drawing.Size(182, 33);
             this.comboBoxDay.TabIndex = 0;
@@ -501,27 +527,18 @@
             this.label9.TabIndex = 12;
             this.label9.Text = "Task\'s name";
             // 
-            // linkLabel5
-            // 
-            this.linkLabel5.AutoSize = true;
-            this.linkLabel5.Location = new System.Drawing.Point(3, 348);
-            this.linkLabel5.Name = "linkLabel5";
-            this.linkLabel5.Size = new System.Drawing.Size(131, 50);
-            this.linkLabel5.TabIndex = 7;
-            this.linkLabel5.TabStop = true;
-            this.linkLabel5.Text = "Save current \r\nTask List to pdf";
-            this.linkLabel5.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel5_LinkClicked);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.createTaskListPanel);
             this.Controls.Add(this.taskListPanel);
             this.Controls.Add(this.openTaskListPanel);
-            this.Controls.Add(this.createTaskListPanel);
             this.Controls.Add(this.searchPanel);
             this.Controls.Add(this.panel1);
+            this.MaximumSize = new System.Drawing.Size(822, 506);
+            this.MinimumSize = new System.Drawing.Size(822, 506);
             this.Name = "Form1";
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);

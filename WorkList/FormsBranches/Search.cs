@@ -21,7 +21,7 @@ namespace WorkList
             //Перенос в нижний правый угол экрана без панели задач
             pt.Offset(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
             //Перенос в местоположение верхнего левого угла формы, чтобы её правый нижний угол попал в правый нижний угол экрана
-            pt.Offset(-Width, -Height);
+            pt.Offset(-Width-920, -Height-450);
             //Новое положение формы
             Location = pt;
 
@@ -30,7 +30,7 @@ namespace WorkList
         }
 
      
-        public void OtherInicialization(List<Tasks> tasks)
+        public  void OtherInicialization(List<Tasks> tasks)
         {
             tableLayoutPanel1.Controls.Clear();   
             BindingList<Tasks> Tasklist = new BindingList<Tasks>();
@@ -42,6 +42,7 @@ namespace WorkList
             }
 
             TasksSource.services.InitPanel(tableLayoutPanel1, Tasklist);
+         
         }
 
     }

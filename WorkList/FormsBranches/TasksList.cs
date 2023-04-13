@@ -27,7 +27,7 @@ namespace WorkList
             //Перенос в нижний правый угол экрана без панели задач
             pt.Offset(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
             //Перенос в местоположение верхнего левого угла формы, чтобы её правый нижний угол попал в правый нижний угол экрана
-            pt.Offset(-Width, -Height);
+            pt.Offset(-Width-200, -Height-900);
             //Новое положение формы
             Location = pt;
 
@@ -36,6 +36,8 @@ namespace WorkList
             if (TasksSource.tasks == null)
             {
                 TasksSource.tasks = new BindingList<Tasks>();
+                
+              
                 tableLayoutPanel1.Controls.Add(label1, 0, 0);
                 tableLayoutPanel1.Controls.Add(comboBox1, 1, 0);
                 tableLayoutPanel1.Controls.Add(dateTimePicker1, 2, 0);
@@ -67,19 +69,20 @@ namespace WorkList
 
 
 
-        internal  void AddNewTasks(Elements elements)
+        internal   void AddNewTasks(Elements elements)
         {
            
             elements.label.DragEnter += Label_DragEnter;
             elements.label.MouseMove += Label_MouseMove;
             elements.label.MouseDown += Label_MouseDown;
-
-            tableLayoutPanel1.Controls.Add(elements.label, 0, counterRow);
+          
+                    tableLayoutPanel1.Controls.Add(elements.label, 0, counterRow);
                     tableLayoutPanel1.Controls.Add(elements.comboBox, 1, counterRow);
                     tableLayoutPanel1.Controls.Add(elements.dateTimePicker, 2, counterRow);
                     tableLayoutPanel1.Controls.Add(elements.label1, 3, counterRow);
                     tableLayoutPanel1.Controls.Add(elements.label2, 4, counterRow);
                     tableLayoutPanel1.Controls.Add(elements.checkBox, 5, counterRow);
+            
             counterRow++;
 
             TasksSource.elements.Add(elements);
@@ -105,7 +108,7 @@ namespace WorkList
             e.Effect = DragDropEffects.Copy;
         }
 
-        public void OtherInicialization(List<Tasks> tasks)
+        public  void OtherInicialization(List<Tasks> tasks)
         {
             tableLayoutPanel1.Controls.Clear();
             BindingList<Tasks> Tasklist = new BindingList<Tasks>();
@@ -114,8 +117,10 @@ namespace WorkList
             {
                 Tasklist.Add(task);
             }
-    
+
+            
             TasksSource.services.InitPanel(tableLayoutPanel1, Tasklist);
+          
         }
     }
 }
